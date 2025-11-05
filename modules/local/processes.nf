@@ -20,9 +20,9 @@ process BEDTOSHARD {
 
     publishDir path: "temp"
 
-    input: 
+    input:
+    path mybed 
     path shard_list
-    path mybed
 
     output:
     path "intersect.bed"
