@@ -11,7 +11,7 @@ process LOCUSTOBED {
 
     script: 
     """
-    bed_to_shard.py --locus ${locus}
+    locus_to_bed.py --locus ${locus}
     """
 }
 
