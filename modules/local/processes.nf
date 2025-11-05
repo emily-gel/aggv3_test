@@ -39,7 +39,7 @@ process SHARDTORESULT {
     publishDir path: "results"
 
     input: 
-    path sample_list
+#    path sample_list
     path "temp/intersect.bed"
 
     output:
@@ -47,6 +47,6 @@ process SHARDTORESULT {
 
     script: 
     """
-    shard_to_result.py --bed_intersect ${bed_intersect} --sample_list ${sample_list}
+    shard_to_result.py --bed_intersect ${bed_intersect}
     """
 }
