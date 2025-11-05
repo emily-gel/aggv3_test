@@ -22,7 +22,7 @@ process BEDTOSHARD {
 
     input: 
     path shard_list
-    path "temp/my_region.bed"
+    path mybed
 
     output:
     path "intersect.bed"
@@ -39,7 +39,7 @@ process SHARDTORESULT {
     publishDir path: "results"
 
     input: 
-    path "temp/intersect.bed"
+    path bed_intersect
 
     output:
     path "results.csv"
