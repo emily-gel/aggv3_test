@@ -39,7 +39,6 @@ process SHARDTORESULT {
     publishDir path: "results"
 
     input: 
-#    path sample_list
     path "temp/intersect.bed"
 
     output:
