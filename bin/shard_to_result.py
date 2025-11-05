@@ -6,9 +6,9 @@ from pysam import VariantFile
 
 @click.command()
 @click.option( "--bed_intersect", required=True)
-@click.option( "--sample_list", required=True)
+# @click.option( "--sample_list", required=True)
 
-def shard_to_result (bed_intersect, sample_list):
+def shard_to_result (bed_intersect):
 
     intersect = pandas.read_table(bed_intersect, header = None)
     intersect['s3_string'] = intersect[10] + intersect[13]
@@ -23,8 +23,8 @@ def shard_to_result (bed_intersect, sample_list):
                 row = [rec.chrom, rec.pos, rec.ref, rec.alts, sample_name, sample_data['GT']]
                 rows.loc[len(rows)] = row
 
-    sample_list = pandas.read_table(sample_list, sep=",", low_memory=False)
-    participant_info = pandas.merge(rows, sample_list, left_on="ID", right_on="platekey")[['chrom', 'pos', 'ref', 'alt', 'genotype', 'platekey', 'participant_id', 'type', 'study_source']]
+    # sample_list = pandas.read_table(sample_list, sep=",", low_memory=False)
+    # participant_info = pandas.merge(rows, sample_list, left_on="ID", right_on="platekey")[['chrom', 'pos', 'ref', 'alt', 'genotype', 'platekey', 'participant_id', 'type', 'study_source']]
     rows.to_csv('results.csv', index=False)
 
 if __name__ == "__main__":
