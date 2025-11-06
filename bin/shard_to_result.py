@@ -13,7 +13,7 @@ def shard_to_result (bed_intersect, sample_list):
 
     intersect = pandas.read_table(bed_intersect, header = None)
     intersect['s3_string'] = intersect[10] + intersect[13]
-    shard_vcf = VariantFile(intersect.loc[0, 'mounted_string']) 
+    shard_vcf = VariantFile(intersect.loc[0, 's3_string']) 
 
     filtered = shard_vcf.fetch(locus.split(":")[0], int(locus.split(":")[1].split("-")[0]), int(locus.split(":")[1].split("-")[1]))
     rows = pandas.DataFrame(columns=['chrom', 'pos', 'ref', 'alt', 'ID', 'genotype'])
