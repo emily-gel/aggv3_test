@@ -2,6 +2,7 @@
 import click
 import os
 import csv
+import pandas
 from pysam import VariantFile
 
 @click.command()
