@@ -40,12 +40,13 @@ process SHARDTORESULT {
 
     input: 
     path bed_intersect
+    path sample_list
 
     output:
     path "results.csv"
 
     script: 
     """
-    shard_to_result.py --bed_intersect ${bed_intersect}
+    shard_to_result.py --bed_intersect ${bed_intersect}  --sample_list ${sample_list}
     """
 }
