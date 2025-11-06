@@ -13,5 +13,5 @@ workflow {
 
     mybed = LOCUSTOBED(ch_locus)
     intersect_bed = BEDTOSHARD(mybed, shard_list)
-    SHARDTORESULT(intersect_bed)
+    SHARDTORESULT(intersect_bed, sample_list)
 }
