@@ -33,13 +33,46 @@ process BEDTOSHARD {
     """
 }
 
-process SHARDTORESULT { 
+process BEDTOSHARD { 
+    debug true
+
+    publishDir path: "temp"
+
+    input:
+    path mybed 
+    path shard_list
+
+    output:
+    path "intersect.bed"
+
+    script: 
+    """
+    bed_to_shard.py --mybed ${mybed} --shard_list ${shard_list}
+    """
+}
+
+process SHARDTOVCF { 
+    debug true
+
+    input: 
+    path bed_intersect
+
+    output:
+    path vcf
+
+    script: 
+    """
+    shard_to_vcf.py --bed_intersect ${bed_intersect}
+    """
+}
+
+process VCFTORESULT { 
     debug true
 
     publishDir path: "results"
 
     input: 
-    path bed_intersect
+    path vcf
     path sample_list
 
     output:
@@ -47,6 +80,6 @@ process SHARDTORESULT {
 
     script: 
     """
-    shard_to_result.py --bed_intersect ${bed_intersect}  --sample_list ${sample_list}
+    shard_to_result.py --vcf ${vcf}  --sample_list ${sample_list}
     """
 }
