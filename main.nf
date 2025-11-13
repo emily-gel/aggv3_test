@@ -3,7 +3,8 @@ nextflow.enable.dsl=2
 
 include { LOCUSTOBED } from "./modules/local/processes.nf"
 include { BEDTOSHARD } from "./modules/local/processes.nf"
-include { SHARDTORESULT } from "./modules/local/processes.nf"
+include { SHARDTOVCF } from "./modules/local/processes.nf"
+include { VCFTORESULT } from "./modules/local/processes.nf"
 
 workflow {
 
@@ -13,5 +14,6 @@ workflow {
 
     mybed = LOCUSTOBED(ch_locus)
     intersect_bed = BEDTOSHARD(mybed, shard_list)
-    SHARDTORESULT(intersect_bed, sample_list)
+    vcf = Channel.fromPath(SHARDTOVCF(intersect_bed))
+    VCFTORESULT(vcf, sample_list)
 }
