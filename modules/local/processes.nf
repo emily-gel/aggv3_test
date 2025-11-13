@@ -33,24 +33,6 @@ process BEDTOSHARD {
     """
 }
 
-process BEDTOSHARD { 
-    debug true
-
-    publishDir path: "temp"
-
-    input:
-    path mybed 
-    path shard_list
-
-    output:
-    path "intersect.bed"
-
-    script: 
-    """
-    bed_to_shard.py --mybed ${mybed} --shard_list ${shard_list}
-    """
-}
-
 process SHARDTOVCF { 
     debug true
 
