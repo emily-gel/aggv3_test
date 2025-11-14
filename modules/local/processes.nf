@@ -42,7 +42,7 @@ process SHARDTOVCF {
     path bed_intersect
 
     output:
-    path vcf
+    val vcf
 
     script: 
     """
