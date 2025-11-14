@@ -39,6 +39,9 @@ process SHARDTOVCF {
     input: 
     path bed_intersect
 
+    output:
+    val vcf
+
     script: 
     """
     shard_to_vcf.py --bed_intersect ${bed_intersect}
