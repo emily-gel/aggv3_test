@@ -14,6 +14,6 @@ workflow {
 
     mybed = LOCUSTOBED(ch_locus)
     intersect_bed = BEDTOSHARD(mybed, shard_list)
-    vcf = Channel.fromPath(SHARDTOVCF("{intersect_bed}"))
+    vcf = SHARDTOVCF(intersect_bed)
     VCFTORESULT(vcf, sample_list)
 }
