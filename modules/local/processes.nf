@@ -36,6 +36,8 @@ process BEDTOSHARD {
 process SHARDTOVCF { 
     debug true
 
+    publishDir path: "temp"
+
     input: 
     path bed_intersect
 
