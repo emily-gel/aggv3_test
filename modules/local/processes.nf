@@ -62,6 +62,6 @@ process VCFTORESULT {
 
     script: 
     """
-    shard_to_result.py --vcf ${vcf}  --sample_list ${sample_list}
+    vcf_to_result.py --vcf ${vcf}  --sample_list ${sample_list}
     """
 }
