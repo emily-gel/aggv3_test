@@ -11,7 +11,7 @@ def shard_to_vcf (bed_intersect):
 
     intersect = pandas.read_table(bed_intersect, header = None)
     intersect['s3_string'] = intersect[10] + intersect[13]
-    return(intersect.loc[0, 's3_string'])
+    click.echo(intersect.loc[0, 's3_string'])
 
 if __name__ == "__main__":
     shard_to_vcf()
