@@ -5,6 +5,7 @@ import csv
 import pandas
 from pysam import VariantFile
 
+
 @click.command()
 @click.option( "--vcf", required=True)
 @click.option( "--sample_list", required=True)
