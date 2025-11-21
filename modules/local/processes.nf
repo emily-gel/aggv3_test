@@ -48,6 +48,20 @@ process SHARDTOVCF {
     """
 }
 
+process GETINDEX {
+    debug true
+
+    input:
+    val vcf
+
+    output:
+    env 'index'
+
+    script:
+    def index = "${vcf}.tbi"
+
+}
+
 process VCFTORESULT { 
     debug true
 
