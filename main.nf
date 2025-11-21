@@ -1,4 +1,4 @@
-#!/usr/bin/env nextflow
+NDEX#!/usr/bin/env nextflow
 nextflow.enable.dsl=2
 
 include { LOCUSTOBED } from "./modules/local/processes.nf"
@@ -15,6 +15,6 @@ workflow {
     mybed = LOCUSTOBED(ch_locus)
     bed_intersect = BEDTOSHARD(mybed, shard_list)
     vcf = SHARDTOVCF(bed_intersect)
-    index = "${vcf}.tbi"
+    index = GETINDEX(vcf)
     VCFTORESULT(vcf, index, ch_locus, sample_list)
 }
