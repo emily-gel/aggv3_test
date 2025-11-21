@@ -58,7 +58,7 @@ process GETINDEX {
     env 'index'
 
     script:
-    def index = "${vcf}.tbi"
+    index="${vcf}.tbi"
 
 }
 
