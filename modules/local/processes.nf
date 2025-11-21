@@ -55,6 +55,8 @@ process VCFTORESULT {
 
     input: 
     path vcf
+    path index
+    val ch_locus
     path sample_list
 
     output:
@@ -62,6 +64,6 @@ process VCFTORESULT {
 
     script: 
     """
-    vcf_to_result.py --vcf ${vcf} --index ${index}  --sample_list ${sample_list}
+    vcf_to_result.py --vcf ${vcf} --index ${index} --locus ${ch_locus}  --sample_list ${sample_list}
     """
 }
