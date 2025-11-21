@@ -8,11 +8,13 @@ from pysam import VariantFile
 
 @click.command()
 @click.option( "--vcf", required=True)
+@click.option( "--index", required=True)
+@click.option( "--locus", required=True)
 @click.option( "--sample_list", required=True)
 
-def vcf_to_result (vcf, sample_list):
+def vcf_to_result (vcf, index, locus, sample_list):
 
-    shard_vcf = VariantFile(vcf) 
+    shard_vcf = VariantFile(vcf, index_filename=index) 
 
     filtered = shard_vcf.fetch(locus.split(":")[0], int(locus.split(":")[1].split("-")[0]), int(locus.split(":")[1].split("-")[1]))
     rows = pandas.DataFrame(columns=['chrom', 'pos', 'ref', 'alt', 'ID', 'genotype'])
@@ -25,7 +27,7 @@ def vcf_to_result (vcf, sample_list):
 
     sample_list = pandas.read_table(sample_list, sep=",", low_memory=False)
     participant_info = pandas.merge(rows, sample_list, left_on="ID", right_on="platekey")[['chrom', 'pos', 'ref', 'alt', 'genotype', 'platekey', 'participant_id', 'type', 'study_source']]
-    rows.to_csv('results.csv', index=False)
+    participant_info.to_csv('results.csv', index=False)
 
 if __name__ == "__main__":
     vcf_to_result()

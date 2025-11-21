@@ -61,7 +61,8 @@ process VCFTORESULT {
     path "results.csv"
 
     script: 
+    def index = "${vcf}.tbi"
     """
-    vcf_to_result.py --vcf ${vcf}  --sample_list ${sample_list}
+    vcf_to_result.py --vcf ${vcf} --index ${index}  --sample_list ${sample_list}
     """
 }

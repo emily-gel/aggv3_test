@@ -15,5 +15,5 @@ workflow {
     mybed = LOCUSTOBED(ch_locus)
     bed_intersect = BEDTOSHARD(mybed, shard_list)
     vcf = SHARDTOVCF(bed_intersect)
-    VCFTORESULT(vcf, sample_list)
+    VCFTORESULT(vcf, index, ch_locus, sample_list)
 }
