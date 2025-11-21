@@ -58,7 +58,7 @@ process GETINDEX {
     env 'index'
 
     script:
-    index="${vcf}.tbi"
+    export index="${vcf}.tbi"
 
 }
 
