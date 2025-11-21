@@ -58,9 +58,8 @@ process GETINDEX {
     env 'index'
 
     script:
-    def index = ${vcf}.tbi
     """
-    aws s3 cp ${index}
+    index=\${vcf}.tbi
     """
 }
 
