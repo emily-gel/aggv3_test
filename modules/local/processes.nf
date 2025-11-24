@@ -40,7 +40,7 @@ process SHARDTOVCF {
     path bed_intersect
 
     output:
-    stdout emit: vcf
+    env 'vcf'
 
     script: 
     """
