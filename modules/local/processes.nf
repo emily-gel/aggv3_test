@@ -52,7 +52,7 @@ process GETINDEX {
     debug true
 
     input:
-    val vcf
+    env vcf
 
     output:
     env 'index'
@@ -69,18 +69,16 @@ process VCFTORESULT {
     publishDir path: "results"
 
     input: 
-    val vcf
+    path vcf
     path index
     val ch_locus
     path sample_list
-
-    path vcf_file: vcf
 
     output:
     path "results.csv"
 
     script: 
     """
-    vcf_to_result.py --vcf ${vcf_file} --index ${index} --locus ${ch_locus}  --sample_list ${sample_list}
+    vcf_to_result.py --vcf ${vcf} --index ${index} --locus ${ch_locus}  --sample_list ${sample_list}
     """
 }
