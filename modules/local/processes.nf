@@ -40,7 +40,7 @@ process SHARDTOVCF {
     path bed_intersect
 
     output:
-    env 'vcf'
+    val vcf
 
     script: 
     """
@@ -69,16 +69,18 @@ process VCFTORESULT {
     publishDir path: "results"
 
     input: 
-    path vcf
+    val vcf
     path index
     val ch_locus
     path sample_list
+
+    path vcf_file: vcf
 
     output:
     path "results.csv"
 
     script: 
     """
-    vcf_to_result.py --vcf ${vcf} --index ${index} --locus ${ch_locus}  --sample_list ${sample_list}
+    vcf_to_result.py --vcf ${vcf_file} --index ${index} --locus ${ch_locus}  --sample_list ${sample_list}
     """
 }
