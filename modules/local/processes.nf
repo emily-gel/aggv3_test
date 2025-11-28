@@ -45,7 +45,7 @@ process SHARDTOVCF {
 
     script: 
     """
-    awk -F'\t' {print $10,$13}' ${bed_intersect}
+    awk -F'\t' '{print $10,$13}' ${bed_intersect}
     """
 }
 
