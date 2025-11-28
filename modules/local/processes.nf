@@ -79,7 +79,7 @@ process VCFTOIDS {
 
     script: 
     """
-    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf}##idx##${index} > ids.csv
+    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf}##idx##${index} | awk '$7 != "0|0"' > ids.csv
     """
 }
 
