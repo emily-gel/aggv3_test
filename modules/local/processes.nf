@@ -30,7 +30,7 @@ process BEDTOSHARD {
 
     script: 
     """
-    bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 1-3,9-13 > intersect.bed
+    bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 1-4,9-13 > intersect.bed
     """
 }
 
@@ -45,7 +45,7 @@ process SHARDTOVCF {
 
     script: 
     """
-    cut -f 10,13 ${bed_intersect} | paste
+    cut -f 11,14 ${bed_intersect} | paste
     """
 }
 
