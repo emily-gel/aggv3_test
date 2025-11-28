@@ -45,7 +45,7 @@ process SHARDTOVCF {
 
     script: 
     """
-    vcf=\$(shard_to_vcf.py --bed_intersect ${bed_intersect})
+    awk -F'\t' {print $10,$13}' ${bed_intersect}
     """
 }
 
