@@ -30,7 +30,7 @@ process BEDTOSHARD {
 
     script: 
     """
-    bed_to_shard.py --mybed ${mybed} --shard_list ${shard_list}
+    bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 1-3,9-13 > intersect.bed
     """
 }
 
