@@ -6,6 +6,7 @@ include { BEDTOSHARD } from "./modules/local/processes.nf"
 include { SHARDTOVCF } from "./modules/local/processes.nf"
 include { GETINDEX } from "./modules/local/processes.nf"
 include { VCFTOIDS } from "./modules/local/processes.nf"
+include { IDSTOSAMPLES } from "./modules/local/processes.nf"
 
 workflow {
 
@@ -17,5 +18,6 @@ workflow {
     bed_intersect = BEDTOSHARD(mybed, shard_list)
     vcf = SHARDTOVCF(bed_intersect)
     index = GETINDEX(vcf)
-    VCFTOIDS(vcf, index, ch_locus)
+    id_list = VCFTOIDS(vcf, index, ch_locus)
+    IDSTOSAMPLES(id_list, sample_list)
 }
