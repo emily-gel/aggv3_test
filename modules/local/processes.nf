@@ -80,6 +80,6 @@ process VCFTORESULT {
 
     script: 
     """
-    vcf_to_result.py --vcf ${vcf} --index ${index} --locus ${ch_locus}  --sample_list ${sample_list}
+    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf}##idx##${index} > results.csv
     """
 }
