@@ -11,9 +11,8 @@ process LOCUSTOBED {
 
     script: 
     """
-    bed_locus=${locus} | tr :- '\t'
     touch my_region.bed
-    echo '${bed_locus}\tlocus'  > my_region.bed
+    echo ${locus} | tr :- '\t'  > my_region.bed
     """
 }
 
