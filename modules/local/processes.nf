@@ -12,7 +12,7 @@ process LOCUSTOBED {
     script: 
     """
     touch my_region.bed
-    echo ${locus} | tr :- '\t'  > my_region.bed
+    echo ${locus} '\tlocus' | tr :- '\t' > my_region.bed
     """
 }
 
