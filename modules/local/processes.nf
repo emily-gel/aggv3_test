@@ -11,7 +11,9 @@ process LOCUSTOBED {
 
     script: 
     """
-    locus_to_bed.py --locus ${locus}
+    bed_locus=${locus} | tr :- '\t'
+    touch my_region.bed
+    echo '${bed_locus}\tlocus'  > my_region.bed
     """
 }
 
