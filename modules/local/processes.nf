@@ -64,22 +64,21 @@ process GETINDEX {
     """
 }
 
-process VCFTORESULT { 
+process VCFTOIDS { 
     debug true
 
-    publishDir path: "results"
+    publishDir path: "temp"
 
     input: 
     path vcf
     path index
     val ch_locus
-    path sample_list
 
     output:
-    path "results.csv"
+    path "ids.csv"
 
     script: 
     """
-    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf}##idx##${index} > results.csv
+    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf}##idx##${index} > ids.csv
     """
 }
