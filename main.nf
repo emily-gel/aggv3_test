@@ -5,7 +5,7 @@ include { LOCUSTOBED } from "./modules/local/processes.nf"
 include { BEDTOSHARD } from "./modules/local/processes.nf"
 include { SHARDTOVCF } from "./modules/local/processes.nf"
 include { GETINDEX } from "./modules/local/processes.nf"
-include { VCFTORESULT } from "./modules/local/processes.nf"
+include { VCFTOIDS } from "./modules/local/processes.nf"
 
 workflow {
 
@@ -17,5 +17,5 @@ workflow {
     bed_intersect = BEDTOSHARD(mybed, shard_list)
     vcf = SHARDTOVCF(bed_intersect)
     index = GETINDEX(vcf)
-    VCFTORESULT(vcf, index, ch_locus, sample_list)
+    VCFTOIDS(vcf, index, ch_locus)
 }
