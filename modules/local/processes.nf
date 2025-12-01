@@ -26,26 +26,11 @@ process BEDTOSHARD {
     path shard_list
 
     output:
-    path "intersect.bed"
-
-    script: 
-    """
-    bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 1-4,9-13 > intersect.bed
-    """
-}
-
-process SHARDTOVCF { 
-    debug true
-
-    input: 
-    path bed_intersect
-
-    output:
     env 'vcf'
 
     script: 
     """
-    export vcf=\$(cut -f 7 ${bed_intersect})\$(cut -f 8 ${bed_intersect})
+    vcf=\(bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 11)(bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 12)
     """
 }
 
