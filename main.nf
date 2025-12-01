@@ -18,6 +18,7 @@ workflow {
     bed_intersect = BEDTOSHARD(mybed, shard_list)
     vcf = SHARDTOVCF(bed_intersect)
     index = GETINDEX(vcf)
-    id_list = VCFTOIDS(vcf, index, ch_locus)
+    vcf_with_index_ch = vcf.join(index)
+    id_list = VCFTOIDS(vcf_with_index_ch, ch_locus)
     IDSTOSAMPLES(id_list, sample_list)
 }
