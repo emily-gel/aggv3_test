@@ -16,8 +16,8 @@ workflow {
 
     mybed = LOCUSTOBED(ch_locus)
     bed_intersect = BEDTOSHARD(mybed, shard_list)
-    vcf = Channel.of(file(SHARDTOVCF(bed_intersect)))
-    index = Channel.of(file(GETINDEX(vcf)))
+    vcf = SHARDTOVCF(bed_intersect)
+    index = GETINDEX(vcf)
     id_list = VCFTOIDS(vcf.join(index), ch_locus)
     IDSTOSAMPLES(id_list, sample_list)
 }
