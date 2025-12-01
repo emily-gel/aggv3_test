@@ -46,7 +46,6 @@ process SHARDTOVCF {
     script: 
     """
     export vcf=\$(cut -f 7,8 ${bed_intersect} | paste)
-    echo $vcf
     """
 }
 
@@ -62,7 +61,6 @@ process GETINDEX {
     script:
     """
     export index=\${vcf}.tbi
-    echo $index
     """
 }
 
@@ -81,7 +79,7 @@ process VCFTOIDS {
 
     script: 
     """
-    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf}##idx##${index} > ids.csv
+    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf} > ids.csv
     """
 }
 
