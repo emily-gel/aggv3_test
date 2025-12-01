@@ -60,9 +60,9 @@ process GETINDEX {
 
     script:
     """
-    echo ${vcf} 
+    echo "VCF: $vcf" 
     index=\${vcf}.tbi
-    echo ${index}
+    echo "Index: $index"
     """
 }
 
