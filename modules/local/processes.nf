@@ -45,7 +45,7 @@ process SHARDTOVCF {
 
     script: 
     """
-    vcf=\$(cut -f 7 ${bed_intersect})$(cut -f 8 ${bed_intersect})
+    vcf=\$(cut -f 7 ${bed_intersect})\$(cut -f 8 ${bed_intersect})
     """
 }
 
