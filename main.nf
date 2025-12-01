@@ -15,8 +15,7 @@ workflow {
     Channel.fromPath(params.samples).set { sample_list }
 
     mybed = LOCUSTOBED(ch_locus)
-    bed_intersect = BEDTOSHARD(mybed, shard_list)
-    vcf = SHARDTOVCF(bed_intersect)
+    vcf = BEDTOSHARD(mybed, shard_list)
     index = GETINDEX(vcf)
     id_list = VCFTOIDS(vcf.join(index), ch_locus)
     IDSTOSAMPLES(id_list, sample_list)
