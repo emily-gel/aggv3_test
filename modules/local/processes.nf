@@ -24,7 +24,7 @@ process BEDTOSHARD {
     path shard_list
 
     output:
-    env 'vcf'
+    val 'vcf'
 
     script: 
     '''
