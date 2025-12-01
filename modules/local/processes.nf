@@ -46,6 +46,7 @@ process SHARDTOVCF {
     script: 
     """
     vcf=\$(cut -f 7,8 ${bed_intersect} | paste)
+    echo $vcf
     """
 }
 
@@ -60,9 +61,8 @@ process GETINDEX {
 
     script:
     """
-    echo "VCF: $vcf" 
     index=\${vcf}.tbi
-    echo "Index: $index"
+    echo $index
     """
 }
 
