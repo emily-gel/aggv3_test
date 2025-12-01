@@ -32,21 +32,6 @@ process BEDTOSHARD {
     '''
 }
 
-process GETINDEX {
-    debug true
-
-    input:
-    env vcf
-
-    output:
-    env 'index'
-
-    script:
-    """
-    export index=\${vcf}.tbi
-    """
-}
-
 process VCFTOIDS { 
     debug true
 
