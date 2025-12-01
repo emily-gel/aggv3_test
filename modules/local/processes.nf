@@ -28,7 +28,7 @@ process BEDTOSHARD {
 
     script: 
     '''
-    vcf=(bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 11)(bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 12)
+    vcf=\(bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 11)(bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 12)
     '''
 }
 
