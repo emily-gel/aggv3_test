@@ -19,8 +19,6 @@ process LOCUSTOBED {
 process BEDTOSHARD { 
     debug true
 
-    publishDir path: "temp"
-
     input:
     path mybed 
     path shard_list
