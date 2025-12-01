@@ -14,8 +14,8 @@ workflow {
     Channel.fromPath(params.samples).set { sample_list }
 
     mybed = LOCUSTOBED(ch_locus)
-    vcf_file = BEDTOSHARD(mybed, shard_list).out.vcf.map { s3_uri -> file(s3_uri) }
-    index_file = GETINDEX(vcf).out.index.map { s3_uri -> file(s3_uri) }
+    vcf_file = BEDTOSHARD(mybed, shard_list).vcf.map { s3_uri -> file(s3_uri) }
+    index_file = GETINDEX(vcf).index.map { s3_uri -> file(s3_uri) }
     id_list = VCFTOIDS(vcf.join(index), ch_locus)
     IDSTOSAMPLES(id_list, sample_list)
 }
