@@ -16,6 +16,6 @@ workflow {
     mybed = LOCUSTOBED(ch_locus)
     vcf_file = BEDTOSHARD(mybed, shard_list).map { s3_uri -> file(s3_uri) }
     index_file = GETINDEX(vcf).map { s3_uri -> file(s3_uri) }
-    id_list = VCFTOIDS(vcf.join(index), ch_locus)
+    id_list = VCFTOIDS(vcf_file.join(index_file), ch_locus)
     IDSTOSAMPLES(id_list, sample_list)
 }
