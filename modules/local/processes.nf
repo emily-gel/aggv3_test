@@ -96,6 +96,6 @@ process IDSTOSAMPLES {
 
     script: 
     """
-    csvjoin -c ID,platekey ids.tsv mounted-data-readonly/sample_list_aggv3_01072025.csv | csvcut -c chrom,pos,ref,alt,genotype,ID,participant_id,type,study_source > results.csv
+    csvjoin -c ID,platekey ${id_list} ${sample_list} | csvcut -c chrom,pos,ref,alt,genotype,ID,participant_id,type,study_source > results.csv
     """
 }
