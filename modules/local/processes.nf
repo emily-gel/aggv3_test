@@ -71,7 +71,6 @@ process VCFTOIDS {
 
     input: 
     path vcf
-    path index
     val ch_locus
 
     output:
@@ -79,7 +78,7 @@ process VCFTOIDS {
 
     script: 
     """
-    bcftools query -r ${ch_locus} --index ${index} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf} > ids.csv
+    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf} > ids.csv
     """
 }
 
