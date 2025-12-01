@@ -60,7 +60,9 @@ process GETINDEX {
 
     script:
     """
+    echo vcf 
     index=\${vcf}.tbi
+    echo index
     """
 }
 
