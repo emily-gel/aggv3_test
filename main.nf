@@ -12,7 +12,7 @@ workflow {
     Channel.fromPath(params.shards).set { shard_list }
     Channel.fromPath(params.samples).set { sample_list }
 
-    mybed = LOCUSTOBED(ch_locus).out
+    mybed = LOCUSTOBED(ch_locus)
     vcf_channel = BEDTOSHARD(mybed, shard_list)
     println "VCF channel"
     vcf_channel.view()
