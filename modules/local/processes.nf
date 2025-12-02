@@ -28,7 +28,7 @@ process BEDTOSHARD {
 
     script: 
     '''
-    bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' echo '{$11$12}'
+    bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' '{echo $11$12}'
     '''
 }
 
