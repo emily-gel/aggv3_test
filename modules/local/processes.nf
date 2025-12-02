@@ -24,11 +24,11 @@ process BEDTOSHARD {
     path shard_list
 
     output:
-    val 'vcf'
+    stdout emit: vcf
 
     script: 
     '''
-    vcf=bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 11,12 | paste -s -d ""
+    bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 11,12 | paste -s -d ""
     '''
 }
 
@@ -38,7 +38,7 @@ process VCFTOIDS {
     publishDir path: "temp"
 
     input: 
-    path vcf
+    tuple path(vcf), path(index)
     val ch_locus
 
     output:
