@@ -24,11 +24,11 @@ process BEDTOSHARD {
     path shard_list
 
     output:
-    stdout emit: vcf
+    val vcf
 
     script: 
     '''
-    bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 11,12 | paste -s -d ""
+    vcf=bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 11,12 | paste -s -d ""
     '''
 }
 
