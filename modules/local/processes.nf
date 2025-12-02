@@ -28,7 +28,7 @@ process BEDTOSHARD {
 
     script: 
     '''
-    bedtools intersect -wo -a ${mybed} -b ${shard_list} | cut -f 11,12 | paste -s -d ""
+    bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' '{print $11$12}'
     '''
 }
 
