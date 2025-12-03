@@ -15,7 +15,7 @@ workflow {
 
  //   mybed = LOCUSTOBED(ch_locus)
 //    vcf_channel = BEDTOSHARD(mybed, shard_list)
-    vcf_file.view( it -> "VCF: ${it}" )
+    vcf_url.view( it -> "VCF: ${it}" )
     vcf_file = vcf_url.map { s3_uri -> file(s3_uri) }
     index_file = vcf_url.map { s3_uri -> file("${s3_uri}.tbi") }
     id_list = VCFTOIDS(vcf_file.join(index_file), ch_locus)
