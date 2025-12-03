@@ -24,7 +24,7 @@ process BEDTOSHARD {
     path shard_list
 
     output:
-    stdout emit vcf_channel
+    stdout emit: vcf_channel
 
     script: 
     """
