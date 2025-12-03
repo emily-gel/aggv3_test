@@ -11,8 +11,8 @@ workflow {
     Channel.value(params.locus).set { ch_locus }
     Channel.fromPath(params.shards).set { shard_list }
     Channel.fromPath(params.samples).set { sample_list }
-    Channel.value(params.vcf_url).set { vcf_file }
-    Channel.value(params.index_url).set { index_file }
+    Channel.fromPath(params.vcf_url).set { vcf_file }
+    Channel.fromPath(params.index_url).set { index_file }
 
  //   mybed = LOCUSTOBED(ch_locus)
 //    vcf_channel = BEDTOSHARD(mybed, shard_list)
