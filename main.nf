@@ -14,7 +14,7 @@ workflow {
 
     mybed = LOCUSTOBED(ch_locus)
     vcf_channel = BEDTOSHARD(mybed, shard_list)
-    vcf_channel_clean = vcf_channel_raw
+    vcf_channel_clean = vcf_channel
         .first() 
         .map { it.trim() } // Keep the trim for safety
         .filter { it }
