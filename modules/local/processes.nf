@@ -24,11 +24,11 @@ process BEDTOSHARD {
     path shard_list
 
     output:
-    val vcf_channel
+    stdout emit vcf_channel
 
     script: 
     """
-    vcf_channel=\$(bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' 'NR==1 {printf "%s%s", \$11, \$12; exit}')
+    bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' 'NR==1 {printf "%s%s", \$11, \$12; exit}'
     """
 }
 
