@@ -24,7 +24,7 @@ process BEDTOSHARD {
     path shard_list
 
     output:
-    env 'vcf_channel'
+    val vcf_channel
 
     script: 
     '''
