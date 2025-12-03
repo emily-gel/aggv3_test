@@ -14,7 +14,7 @@ workflow {
 
     mybed = LOCUSTOBED(ch_locus)
     vcf_channel = BEDTOSHARD(mybed, shard_list)
-    def vcf_tuple_channel = vcf_channel.map { s3_uri -> 
+    vcf_tuple_channel = vcf_channel.map { s3_uri -> 
         tuple(file(s3_uri), file("${s3_uri}.tbi")) 
     }
     id_list = VCFTOIDS(vcf_tuple_channel, ch_locus)
