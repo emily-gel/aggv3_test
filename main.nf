@@ -11,13 +11,14 @@ workflow {
     Channel.value(params.locus).set { ch_locus }
     Channel.fromPath(params.shards).set { shard_list }
     Channel.fromPath(params.samples).set { sample_list }
-    Channel.value(params.vcf_url).set { vcf_url }
+    Channel.value(params.vcf_url).set { vcf_file }
+    Channel.value(params.index_url).set { index_file }
 
  //   mybed = LOCUSTOBED(ch_locus)
 //    vcf_channel = BEDTOSHARD(mybed, shard_list)
-    vcf_url.view( it -> "VCF: ${it}" )
-    vcf_file = vcf_url.map { s3_uri -> file(s3_uri) }
-    index_file = vcf_url.map { s3_uri -> file("${s3_uri}.tbi") }
+//    vcf_url.view( it -> "VCF: ${it}" )
+ //   vcf_file = vcf_url.map { s3_uri -> file(s3_uri) }
+ //   index_file = vcf_url.map { s3_uri -> file("${s3_uri}.tbi") }
     id_list = VCFTOIDS(vcf_file.join(index_file), ch_locus)
     IDSTOSAMPLES(id_list, sample_list)
 }
