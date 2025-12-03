@@ -27,9 +27,9 @@ process BEDTOSHARD {
     stdout emit: vcf_channel
 
     script: 
-    '''
+    """
     bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' '{print $11$12}'
-    '''
+    """
 }
 
 process VCFTOIDS { 
