@@ -14,7 +14,9 @@ workflow {
 
     mybed = LOCUSTOBED(ch_locus)
     vcf_channel = BEDTOSHARD(mybed, shard_list)
-    vcf_channel_filtered = vcf_channel.filter { it.trim() }
+    vcf_channel_filtered = vcf_channel
+        .map { it.trim() }
+        .filter { it } // Filter out any lines that become empty strings after trimming
     vcf_channel_filtered.view( it -> "VCF: ${it}" )
     vcf_file = vcf_channel_filtered.map { s3_uri -> file(s3_uri) }
     index_file = vcf_channel_filtered.map { s3_uri -> file("${s3_uri}.tbi") }
