@@ -42,7 +42,7 @@ process VCFTOIDS {
     val ch_locus
 
     output:
-    path "ids.csv"
+    path "ids.tsv"
 
     script: 
     """
