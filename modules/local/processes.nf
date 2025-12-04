@@ -46,7 +46,7 @@ process VCFTOIDS {
 
     script: 
     """
-    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf} > ids.csv
+    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf} > ids.tsv
     """
 }
 
@@ -64,6 +64,6 @@ process IDSTOSAMPLES {
 
     script: 
     """
-    csvjoin -c SAMPLE,platekey ${id_list} ${sample_list} | csvcut -c CHROM,POS,REF,ALT,GT,platekey,participant_id,type,study_source | csvgrep -c GT -m 0/0 -i > results.csv
+    csvformat -T ${sample_list} | csvjoin -t -c SAMPLE,platekey ${id_list} - | csvcut -c CHROM,POS,REF,ALT,GT,platekey,participant_id,type,study_source | csvgrep -c GT -m 0/0 -i > results.csv
     """
 }
