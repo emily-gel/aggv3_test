@@ -64,7 +64,7 @@ process IDSTOSAMPLES {
 
     script: 
     """
-    #!/usr/bin/python
+    #!/usr/bin/env python
 
     import pandas as pd
 
