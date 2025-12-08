@@ -64,7 +64,6 @@ process IDSTOSAMPLES {
 
     script: 
     """
-    #!/usr/bin/python
     import pandas as pd
 
     sample_list = pd.read_csv('${sample_list}', sep='\\t', low_memory=False)
