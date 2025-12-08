@@ -73,5 +73,6 @@ process IDSTOSAMPLES {
 
     participant_info = pandas.merge(filtered_id, sample_list, left_on="ID", right_on="platekey")[['CHROM', 'POS', 'REF', 'ALT', 'GT', 'platekey', 'participant_id', 'type', 'study_source']]
     participant_info.to_csv('results.csv', index=False)
+    END
     """
 }
