@@ -51,6 +51,7 @@ process VCFTOIDS {
 }
 
 process IDSTOSAMPLES { 
+    shell = ['/bin/sh', '-c']
     debug true
 
     publishDir path: "results"
