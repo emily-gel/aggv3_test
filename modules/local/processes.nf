@@ -69,7 +69,7 @@ process IDSTOSAMPLES {
     import pandas as pd
 
     sample_list = pd.read_csv('${sample_list}', sep='\\t', low_memory=False)
-    id_list = pd.read_csv('${id_list}', sep=',')
+    id_list = pd.read_csv('${id_list}', sep='\\t', header=None, names=['ID', 'CHROM', 'POS', 'REF', 'ALT', 'FILTER', 'GT'] , low_memory=False) 
     filtered_id = id_list[id_list['GT'] != '0/0']
 
     participant_info = pd.merge(filtered_id, sample_list, left_on="ID", right_on="platekey")[['CHROM', 'POS', 'REF', 'ALT', 'GT', 'platekey', 'participant_id', 'type', 'study_source']]
