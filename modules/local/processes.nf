@@ -11,67 +11,52 @@ process LOCUSTOBED {
 
     script: 
     """
-    locus_to_bed.py --locus ${locus}
+    touch my_region.bed
+    echo '${locus}\tlocus' | tr :- '\t' > my_region.bed
     """
 }
 
 process BEDTOSHARD { 
     debug true
 
-    publishDir path: "temp"
-
     input:
     path mybed 
     path shard_list
 
     output:
-    path "intersect.bed"
+    stdout emit: vcf_channel
 
     script: 
     """
-    bed_to_shard.py --mybed ${mybed} --shard_list ${shard_list}
+    bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' 'NR==1 {printf "%s%s", \$11, \$12; exit}'
     """
 }
 
-process SHARDTOVCF { 
+process VCFTOIDS { 
     debug true
+
+    publishDir path: "temp"
 
     input: 
-    path bed_intersect
+    tuple path(vcf), path(index)
+    val ch_locus
 
     output:
-    env 'vcf'
+    path "ids.tsv"
 
     script: 
     """
-    vcf=\$(shard_to_vcf.py --bed_intersect ${bed_intersect})
+    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf} > ids.tsv
     """
 }
 
-process GETINDEX {
-    debug true
-
-    input:
-    env vcf
-
-    output:
-    env 'index'
-
-    script:
-    """
-    index=\${vcf}.tbi
-    """
-}
-
-process VCFTORESULT { 
+process IDSTOSAMPLES { 
     debug true
 
     publishDir path: "results"
 
     input: 
-    path vcf
-    path index
-    val ch_locus
+    path id_list
     path sample_list
 
     output:
@@ -79,6 +64,15 @@ process VCFTORESULT {
 
     script: 
     """
-    vcf_to_result.py --vcf ${vcf} --index ${index} --locus ${ch_locus}  --sample_list ${sample_list}
+    #!/usr/bin/env python
+
+    import pandas as pd
+
+    sample_list = pd.read_csv('${sample_list}', low_memory=False)
+    id_list = pd.read_csv('${id_list}', sep='\\t', header=None, names=['ID', 'CHROM', 'POS', 'REF', 'ALT', 'FILTER', 'GT'] , low_memory=False) 
+    filtered_id = id_list[id_list['GT'] != '0/0']
+
+    participant_info = pd.merge(filtered_id, sample_list, left_on="ID", right_on="platekey")[['CHROM', 'POS', 'REF', 'ALT', 'GT', 'platekey', 'participant_id', 'type', 'study_source']]
+    participant_info.to_csv('results.csv', index=False)
     """
 }
