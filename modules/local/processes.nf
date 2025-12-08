@@ -64,7 +64,7 @@ process IDSTOSAMPLES {
 
     script: 
     """
-    python <<END
+    #!/usr/bin/python
     import pandas as pd
 
     sample_list = pd.read_csv('${sample_list}', sep='\\t', low_memory=False)
@@ -73,6 +73,5 @@ process IDSTOSAMPLES {
 
     participant_info = pandas.merge(filtered_id, sample_list, left_on="ID", right_on="platekey")[['CHROM', 'POS', 'REF', 'ALT', 'GT', 'platekey', 'participant_id', 'type', 'study_source']]
     participant_info.to_csv('results.csv', index=False)
-    END
     """
 }
