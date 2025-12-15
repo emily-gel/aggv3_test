@@ -12,11 +12,20 @@ workflow {
     Channel.fromPath(params.shards).set { shard_list }
     Channel.fromPath(params.samples).set { sample_list }
 
+    // convert input locus to bed
     mybed = LOCUSTOBED(ch_locus)
+
+    // identify s3 locus of the relevant shard VCF
     vcf_channel = BEDTOSHARD(mybed, shard_list)
+
+    // find the location of the index file and create a tuple of the VCF channel and index channel
     vcf_tuple_channel = vcf_channel.map { s3_uri -> 
         tuple(file(s3_uri), file("${s3_uri}.tbi")) 
     }
+
+    // query the VCF for all variants within the region
     id_list = VCFTOIDS(vcf_tuple_channel, ch_locus)
+
+    // filter the participants for variant genotypes and query for participant details
     IDSTOSAMPLES(id_list, sample_list)
 }
