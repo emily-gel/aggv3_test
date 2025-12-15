@@ -4,6 +4,6 @@ This workflow takes a locus and pulls out participants with non-ref alleles with
 
 ## Inputs required
 
-`--locus` in the form `chr#:start-end`
-`--shards`, the file path of the shard bed file
-`--samples`, the file path of the sample list
+* `--locus` in the form `chr#:start-end`
+* `--shards`, the file path of the shard bed file
+* `--samples`, the file path of the sample list
