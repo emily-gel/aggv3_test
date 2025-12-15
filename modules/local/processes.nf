@@ -1,4 +1,4 @@
-<-- LOCUSTOBED converts the locus to a bed file, splitting the locus on `:` and `-` to make the bed file -->
+// LOCUSTOBED converts the locus to a bed file, splitting the locus on `:` and `-` to make the bed file
 
 process LOCUSTOBED {  
     debug true
@@ -18,7 +18,7 @@ process LOCUSTOBED {
     """
 }
 
-<-- BEDTOSHARD intersects the bed file created in LOCUSTOBED against the shard bed file to identify the relevant shard VCF, emitting the s3 bucket string as a channel -->
+// BEDTOSHARD intersects the bed file created in LOCUSTOBED against the shard bed file to identify the relevant shard VCF, emitting the s3 bucket string as a channel
 
 process BEDTOSHARD { 
     debug true
@@ -36,7 +36,7 @@ process BEDTOSHARD {
     """
 }
 
-<-- VCFTOIDS uses the original locus channel to query the vcf, the s3 location of which was found in BEDTOSHARD, and queries for variants within the locus, pulling out variant details and genotypes. The vcf needs to be input as a tuple of the vcf s3 location and the index s3 location for the bcftools query to work. -->
+// VCFTOIDS uses the original locus channel to query the vcf, the s3 location of which was found in BEDTOSHARD, and queries for variants within the locus, pulling out variant details and genotypes. The vcf needs to be input as a tuple of the vcf s3 location and the index s3 location for the bcftools query to work.
 
 process VCFTOIDS { 
     debug true
@@ -56,7 +56,7 @@ process VCFTOIDS {
     """
 }
 
-<-- IDSTOSAMPLES uses the list of variants and IDs from VCFTOIDS, filters it for non-variant genotypes and combines it with the sample list from the original input, to provide details of the partcipants -->
+// IDSTOSAMPLES uses the list of variants and IDs from VCFTOIDS, filters it for non-variant genotypes and combines it with the sample list from the original input, to provide details of the partcipants
 
 process IDSTOSAMPLES { 
     debug true
