@@ -26,7 +26,7 @@ workflow {
     }
 
     // query the VCF for all variants within the region
-    id_list = VCFTOIDS(vcf_tuple_channel, ch_locus).out.collect
+    id_list = VCFTOIDS(vcf_tuple_channel, ch_locus).out.collect()
 
     // filter the participants for variant genotypes and query for participant details
     IDSTOSAMPLES(id_list, sample_list)
