@@ -64,7 +64,7 @@ process IDSTOSAMPLES {
     publishDir path: "results"
 
     input: 
-    path id_list
+    path "input_files/*"
     path sample_list
 
     output:
@@ -75,14 +75,15 @@ process IDSTOSAMPLES {
     #!/usr/bin/env python
 
     import pandas as pd
+    import os
 
-    sample_list = pd.read_csv('${sample_list}', low_memory=False)
-    id_list = pd.DataFrame()
-    for input in ${id_list.inspect()}:
+    # Loop through the files in the directory
+    for input in os.listdir('input_files'):
         input_list = pd.read_csv('input', sep='\\t', header=None, names=['ID', 'CHROM', 'POS', 'REF', 'ALT', 'FILTER', 'GT'] , low_memory=False) 
         filtered_input = input_list[input_list['GT'] != '0/0']
         id_list = pd.concat([id_list, input_list], ignore_index=True)
 
+    sample_list = pd.read_csv('${sample_list}', low_memory=False)
     participant_info = pd.merge(id_list, sample_list, left_on="ID", right_on="platekey")[['CHROM', 'POS', 'REF', 'ALT', 'GT', 'platekey', 'participant_id', 'type', 'study_source']]
     participant_info.to_csv('results.csv', index=False)
     """
