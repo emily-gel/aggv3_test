@@ -52,7 +52,7 @@ process VCFTOIDS {
 
     script: 
     """
-    bcftools query -r ${ch_locus} -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf} > ids_${task.index}.tsv
+    bcftools query -r ${ch_locus} -i 'GT="alt"' -f '[%SAMPLE\t%CHROM\t%POS\t%REF\t%ALT\t%FILTER\t%GT\n]' ${vcf} > ids_${task.index}.tsv
     """
 }
 
@@ -82,7 +82,6 @@ process IDSTOSAMPLES {
     # Loop through the files in the directory
     for input in glob.glob("input_files/*.tsv"):
         input_list = pd.read_csv(input, sep='\\t', header=None, names=['ID', 'CHROM', 'POS', 'REF', 'ALT', 'FILTER', 'GT'] , low_memory=False) 
-        filtered_input = input_list[input_list['GT'] != '0/0']
         id_list = pd.concat([id_list, input_list], ignore_index=True)
 
     sample_list = pd.read_csv('${sample_list}', low_memory=False)
