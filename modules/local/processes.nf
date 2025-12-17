@@ -77,6 +77,8 @@ process IDSTOSAMPLES {
     import pandas as pd
     import glob
 
+    id_list = pd.DataFrame()
+
     # Loop through the files in the directory
     for input in glob.glob("input_files/*.tsv"):
         input_list = pd.read_csv(input, sep='\\t', header=None, names=['ID', 'CHROM', 'POS', 'REF', 'ALT', 'FILTER', 'GT'] , low_memory=False) 
