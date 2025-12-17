@@ -16,7 +16,9 @@ workflow {
     mybed = LOCUSTOBED(ch_locus)
 
     // identify s3 locus of the relevant shard VCF
-    vcf_channel = BEDTOSHARD(mybed, shard_list)
+    vcf_list = BEDTOSHARD(mybed, shard_list)
+
+    vcf_channel = getMatches.out.vcf_list.splitText() { it.trim() }
 
     // find the location of the index file and create a tuple of the VCF channel and index channel
     vcf_tuple_channel = vcf_channel.map { s3_uri -> 
