@@ -78,7 +78,7 @@ process IDSTOSAMPLES {
 
     sample_list = pd.read_csv('${sample_list}', low_memory=False)
     id_list = pd.DataFrame()
-    for input in (${id_list}):
+    for input in (${id_list,}):
         input_list = pd.read_csv('input', sep='\\t', header=None, names=['ID', 'CHROM', 'POS', 'REF', 'ALT', 'FILTER', 'GT'] , low_memory=False) 
         filtered_input = input_list[input_list['GT'] != '0/0']
         id_list = pd.concat([id_list, input_list], ignore_index=True)
