@@ -1,7 +1,7 @@
 {
   "schemas": [
     {
-      "filePath": "aggv3_schema.json",
+      "filePath": "nextflow_schema.json",
       "name": "Schema"
     }
 }
