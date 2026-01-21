@@ -1,0 +1,7 @@
+{
+  "schemas": [
+    {
+      "filePath": "aggv3_schema.json",
+      "name": "Schema"
+    }
+}
