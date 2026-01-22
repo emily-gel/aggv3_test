@@ -7,17 +7,13 @@
             "required": ["locus", "shards", "samples"]
             "properties": {
                 "locus": {
-                  "type": "string",
-                  "pattern": "chr[1-22]|X|Y:\d+-\d+",
-                  "description": "The locus you want to query"
+                  "type": "string"
               },
                 "shards": {
-                  "type": "string",
-                  "description": "The shard list"
+                  "type": "string"
               },
                 "samples": {
-                  "type": "string",
-                  "description": "The sample list"
+                  "type": "string"
               }
             }
         }
