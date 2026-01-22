@@ -2,7 +2,8 @@
     "$schema": "http://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "$defs": {
-        "my_params": {
+        "params": {
+            "title": "Parameters"
             "type": "object",
             "required": ["locus", "shards", "samples"],
             "properties": {
@@ -26,6 +27,6 @@
         }
     },         
  "allOf": [
-      { "$ref": "#/$defs/my_params" }
+      { "$ref": "#/$defs/params" }
   ]
 }
