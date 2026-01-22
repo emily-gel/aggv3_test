@@ -24,7 +24,7 @@
                   
  "allOf": [
       {
-          "$ref": "#/defs/my_params"
+          "$ref": "#/$defs/my_params"
       }
   ]
 }
