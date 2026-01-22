@@ -7,20 +7,25 @@
             "required": ["locus", "shards", "samples"]
             "properties": {
                 "locus": {
-                  "type": "string"
+                  "type": "string",
+                  "pattern": "chr[1-22]|X|Y:\d+-\d+",
+                  "description": "The locus you want to query",
+                  "default": "chr1:181049066-181049110"
               },
                 "shards": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "s3 lcoation of the shards bed file",
+                  "default": "s3 location"
               },
                 "samples": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "s3 lcoation of the samples file",
+                  "default": "s3 location"
               }
             }
         }
                   
  "allOf": [
-      {
-          "$ref": "#/$defs/my_params"
-      }
+      { "$ref": "#/$defs/my_params" }
   ]
 }
