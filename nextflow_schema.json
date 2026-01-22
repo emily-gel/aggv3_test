@@ -1,33 +1,30 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/nf-core/rnaseq/master/nextflow_schema.json",
-    "title": "nf-core/rnaseq pipeline parameters",
-    "description": "RNA sequencing analysis pipeline for gene/isoform quantification and extensive quality control.",
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
     "type": "object",
-    "definitions": {
+    "$defs": {
         "my_params": {
+            "type": "object",
+            "required": ["locus", "shards", "samples"]
             "properties": {
                 "locus": {
                   "type": "string",
                   "pattern": "chr[1-22]|X|Y:\d+-\d+",
-                  "description": "The locus you want to query",
-                  "help_text": "Locus in the format chr#:#########-#########",
+                  "description": "The locus you want to query"
               },
                 "shards": {
                   "type": "string",
-                  "description": "The shard list",
-                  "help_text": "Locus in the format chr#:#########-#########",
+                  "description": "The shard list"
               },
                 "samples": {
                   "type": "string",
-                  "description": "The sample list",
+                  "description": "The sample list"
               }
             }
         }
                   
-      "allOf": [
+ "allOf": [
       {
-          "$ref": "#/definitions/my_params"
+          "$ref": "#/defs/my_params"
       }
   ]
 }
