@@ -8,7 +8,6 @@
             "properties": {
                 "locus": {
                   "type": "string",
-                  "pattern": "chr[1-22]|X|Y:\d+-\d+",
                   "description": "The locus you want to query",
                   "default": "chr1:181049066-181049110"
               },
