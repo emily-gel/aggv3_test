@@ -32,7 +32,7 @@ process BEDTOSHARD {
 
     script: 
     """
-    bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' '{printf "%s%s\\n", \$11, \$12}'
+    bedtools intersect -wo -a ${mybed} -b ${shard_list} | awk -F '\t' '{printf "%s\\n", \$11}'
     """
 }
 
