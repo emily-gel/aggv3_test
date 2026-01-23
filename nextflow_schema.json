@@ -3,7 +3,7 @@
     "type": "object",
     "$defs": {
         "params": {
-            "title": "Parameters"
+            "title": "Parameters",
             "type": "object",
             "required": ["locus", "shards", "samples"],
             "properties": {
