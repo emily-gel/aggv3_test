@@ -16,12 +16,12 @@
                 "shards": {
                   "type": "string",
                   "description": "s3 location of the shards bed file",
-                  "default": "s3://51242681668-gel-data-resources/dragen3.7.8/AggV3_resources/manifests/genomic_data/biallelic_shards.bed"
+                  "default": "s3://512426816668-gel-data-resources/dragen3.7.8/AggV3_resources/manifests/genomic_data/biallelic_shards.bed"
               },
                 "samples": {
                   "type": "string",
                   "description": "s3 location of the samples file",
-                  "default": "s3://51242681668-gel-data-resources/dragen3.7.8/AggV3_resources/samples/sample_list/2026-01-23/sample_list_aggv3.csv"
+                  "default": "s3://512426816668-gel-data-resources/dragen3.7.8/AggV3_resources/samples/sample_list/2026-01-23/sample_list_aggv3.csv"
               }
             }
         }
